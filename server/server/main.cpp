@@ -25,15 +25,13 @@ INT_PTR CALLBACK DlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	switch (uMsg)
 	{
 	case WM_INITDIALOG:
-		////инициализация сокетов
-		//WSAStartup(MAKEWORD(2, 2), &wsaData);
+		//инициализация сокетов
+		WSAStartup(MAKEWORD(2, 2), &wsaData);
 		break;
 
 	case WM_COMMAND:
 
 		if (LOWORD(wParam == IDC_BUTTON1)) { //запуск сервера
-			//инициализация сокетов
-			WSAStartup(MAKEWORD(2, 2), &wsaData);
 			//создаем потоковый сокет, протокол TCP
 			_socket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
 			//Семейство адресов IPv4
@@ -82,10 +80,11 @@ INT_PTR CALLBACK DlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			    //Отправляем сообщение клиенту
 				send(acceptSocket, buffer, strlen(buffer), 0);
 			//send(_socket, buffer, strlen(buffer), 0);
+		}
 
-
-
-
+		if (LOWORD(wParam == IDC_BUTTON3)) { //остановка работы
+			closesocket(_socket);
+			closesocket(acceptSocket);
 		}
 
 		break;

@@ -72,6 +72,10 @@ INT_PTR CALLBACK DlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			
 		}
 
+		if (LOWORD(wParam == IDC_BUTTON3)) {
+			closesocket(_socket);
+		}
+
 		break;
 
 
